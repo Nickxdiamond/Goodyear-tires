@@ -7,7 +7,7 @@ import re
 import json
 
 size_links = ['https://www.goodyear.com/en-US/tires/assurance-all-season/sizes-specs', 'https://www.goodyear.com/en-US/tires/assurance-comfortdrive/sizes-specs', 'https://www.goodyear.com/en-US/tires/assurance-maxlife/sizes-specs', 'https://www.goodyear.com/en-US/tires/assurance-weatherready/sizes-specs', 'https://www.goodyear.com/en-US/tires/dunlop-direzza-dz102-tires/sizes-specs', 'https://www.goodyear.com/en-US/tires/dunlop-grandtrek-at20-tires/sizes-specs', 'https://www.goodyear.com/en-US/tires/dunlop-grandtrek-at23-tires/sizes-specs', 'https://www.goodyear.com/en-US/tires/dunlop-grandtrek-pt2a-tires/sizes-specs', 'https://www.goodyear.com/en-US/tires/dunlop-grandtrek-sj6-tires/sizes-specs', 'https://www.goodyear.com/en-US/tires/dunlop-grandtrek-st30-tires/sizes-specs', 'https://www.goodyear.com/en-US/tires/dunlop-grandtrek-touring-as-tires/sizes-specs', 'https://www.goodyear.com/en-US/tires/dunlop-signature-hp-tires/sizes-specs', 'https://www.goodyear.com/en-US/tires/dunlop-signature-ii-tires/sizes-specs', 'https://www.goodyear.com/en-US/tires/dunlop-sp-31a-tires/sizes-specs', 'https://www.goodyear.com/en-US/tires/dunlop-sp-31-tires/sizes-specs', 'https://www.goodyear.com/en-US/tires/dunlop-sport-maxx-race/sizes-specs', 'https://www.goodyear.com/en-US/tires/dunlop-sport-maxx-rt/sizes-specs', 'https://www.goodyear.com/en-US/tires/dunlop-sp-sport-01-dsst-rof-tires/sizes-specs', 'https://www.goodyear.com/en-US/tires/dunlop-sp-sport-5000-dsst-tires/sizes-specs', 'https://www.goodyear.com/en-US/tires/dunlop-sp-sport-5000m-dsst-ctt-tires/sizes-specs', 'https://www.goodyear.com/en-US/tires/dunlop-sp-sport-5000m-tires/sizes-specs', 'https://www.goodyear.com/en-US/tires/dunlop-sp-sport-5000-tires/sizes-specs', 'https://www.goodyear.com/en-US/tires/dunlop-sp-sport-7000-as-tires/sizes-specs', 'https://www.goodyear.com/en-US/tires/dunlop-sp-sport-7010-as-dsst-tires/sizes-specs', 'https://www.goodyear.com/en-US/tires/dunlop-sp-sport-maxx-050/sizes-specs', 'https://www.goodyear.com/en-US/tires/dunlop-sp-sport-maxx-050-dsst-ctt/sizes-specs', 'https://www.goodyear.com/en-US/tires/dunlop-sp-sport-maxx-a1-tires/sizes-specs', 'https://www.goodyear.com/en-US/tires/dunlop-sp-sport-maxx-gt600-dsst-tires/sizes-specs', 'https://www.goodyear.com/en-US/tires/dunlop-sp-sport-maxx-gt-dsst-rof-tires/sizes-specs', 'https://www.goodyear.com/en-US/tires/dunlop-sp-sport-maxx-gt-tires/sizes-specs', 'https://www.goodyear.com/en-US/tires/dunlop-sp-winter-sport-3d-dsst-rof-tires/sizes-specs', 'https://www.goodyear.com/en-US/tires/dunlop-sp-winter-sport3d-tires/sizes-specs', 'https://www.goodyear.com/en-US/tires/dunlop-sp-winter-sport-4d/sizes-specs', 'https://www.goodyear.com/en-US/tires/dunlop-sp-winter-sport-4d-noiseshield-technology/sizes-specs', 'https://www.goodyear.com/en-US/tires/dunlop-sp-winter-sport-4d-rof/sizes-specs', 'https://www.goodyear.com/en-US/tires/dunlop-winter-maxx/sizes-specs', 'https://www.goodyear.com/en-US/tires/dunlop-winter-maxx-2/sizes-specs', 'https://www.goodyear.com/en-US/tires/dunlop-winter-maxx-sj8/sizes-specs', 'https://www.goodyear.com/en-US/tires/eagle-exhilarate/sizes-specs', 'https://www.goodyear.com/en-US/tires/eagle-f1-asymmetric/sizes-specs', 'https://www.goodyear.com/en-US/tires/eagle-f1-asymmetric-2/sizes-specs', 'https://www.goodyear.com/en-US/tires/eagle-f1-asymmetric-2-rof/sizes-specs', 'https://www.goodyear.com/en-US/tires/eagle-f1-asymmetric-3/sizes-specs', 'https://www.goodyear.com/en-US/tires/eagle-f1-asymmetric-3-rof/sizes-specs', 'https://www.goodyear.com/en-US/tires/eagle-f1-asymmetric-3-sct/sizes-specs', 'https://www.goodyear.com/en-US/tires/eagle-f1-asymmetric-all-season/sizes-specs', 'https://www.goodyear.com/en-US/tires/eagle-f1-asymmetric-all-season-sct/sizes-specs', 'https://www.goodyear.com/en-US/tires/eagle-f1-asymmetric-run-on-flat/sizes-specs', 'https://www.goodyear.com/en-US/tires/eagle-f1-asymmetric-suv-at/sizes-specs', 'https://www.goodyear.com/en-US/tires/eagle-f1-gs-2-emt/sizes-specs', 'https://www.goodyear.com/en-US/tires/eagle-f1-gs-emt/sizes-specs', 'https://www.goodyear.com/en-US/tires/eagle-f1-super-car/sizes-specs', 'https://www.goodyear.com/en-US/tires/eagle-f1-supercar-3/sizes-specs', 'https://www.goodyear.com/en-US/tires/eagle-f1-supercar-3r/sizes-specs', 'https://www.goodyear.com/en-US/tires/eagle-f1-super-car-emt/sizes-specs', 'https://www.goodyear.com/en-US/tires/eagle-f1-supercar-g2-rof/sizes-specs', 'https://www.goodyear.com/en-US/tires/eagle-gt-ii/sizes-specs', 'https://www.goodyear.com/en-US/tires/eagle-ls/sizes-specs', 'https://www.goodyear.com/en-US/tires/eagle-ls-2/sizes-specs', 'https://www.goodyear.com/en-US/tires/eagle-ls-2-rof/sizes-specs', 'https://www.goodyear.com/en-US/tires/eagle-nct-5-emt/sizes-specs', 'https://www.goodyear.com/en-US/tires/eagle-nct-5-rof/sizes-specs', 'https://www.goodyear.com/en-US/tires/eagle-rs-a/sizes-specs', 'https://www.goodyear.com/en-US/tires/eagle-rs-a2/sizes-specs', 'https://www.goodyear.com/en-US/tires/eagle-sport-all-season/sizes-specs', 'https://www.goodyear.com/en-US/tires/eagle-sport-all-season-rof/sizes-specs', 'https://www.goodyear.com/en-US/tires/eagle-sport-all-season-sct/sizes-specs', 'https://www.goodyear.com/en-US/tires/eagle-touring/sizes-specs', 'https://www.goodyear.com/en-US/tires/eagle-touring-sct/sizes-specs', 'https://www.goodyear.com/en-US/tires/eagle-ultragrip-gw-2/sizes-specs', 'https://www.goodyear.com/en-US/tires/eagle-ultragrip-gw-3/sizes-specs', 'https://www.goodyear.com/en-US/tires/efficient-grip-rof/sizes-specs', 'https://www.goodyear.com/en-US/tires/endurance/sizes-specs', 'https://www.goodyear.com/en-US/tires/excellence-rof/sizes-specs', 'https://www.goodyear.com/en-US/tires/excellence-tires/sizes-specs', 'https://www.goodyear.com/en-US/tires/fierce-attitude-mt/sizes-specs', 'https://www.goodyear.com/en-US/tires/fortera-hl/sizes-specs', 'https://www.goodyear.com/en-US/tires/fortera-sl/sizes-specs', 'https://www.goodyear.com/en-US/tires/integrity-tires/sizes-specs', 'https://www.goodyear.com/en-US/tires/kelly-edge-as/sizes-specs', 'https://www.goodyear.com/en-US/tires/kelly-edge-at/sizes-specs', 'https://www.goodyear.com/en-US/tires/kelly-edge-hp/sizes-specs', 'https://www.goodyear.com/en-US/tires/kelly-edge-ht/sizes-specs', 'https://www.goodyear.com/en-US/tires/kelly-edge-ht-lt/sizes-specs', 'https://www.goodyear.com/en-US/tires/kelly-safari-tsr/sizes-specs', 'https://www.goodyear.com/en-US/tires/kelly-winter-access/sizes-specs', 'https://www.goodyear.com/en-US/tires/ultra-grip-8-performance/sizes-specs', 'https://www.goodyear.com/en-US/tires/ultra-grip-ice-wrt/sizes-specs', 'https://www.goodyear.com/en-US/tires/ultra-grip-ice-wrt-lt/sizes-specs', 'https://www.goodyear.com/en-US/tires/ultra-grip-ice-wrt-suv/sizes-specs', 'https://www.goodyear.com/en-US/tires/ultra-grip-winter-tire/sizes-specs', 'https://www.goodyear.com/en-US/tires/wintercommand/sizes-specs', 'https://www.goodyear.com/en-US/tires/wintercommand-light-truck/sizes-specs', 'https://www.goodyear.com/en-US/tires/wintercommand-suv-cuv/sizes-specs', 'https://www.goodyear.com/en-US/tires/wintercommand-ultra/sizes-specs', 'https://www.goodyear.com/en-US/tires/wrangler-all-terrain-adventure/sizes-specs', 'https://www.goodyear.com/en-US/tires/wrangler-at/sizes-specs', 'https://www.goodyear.com/en-US/tires/wrangler-ats/sizes-specs', 'https://www.goodyear.com/en-US/tires/wrangler-duratrac/sizes-specs', 'https://www.goodyear.com/en-US/tires/wrangler-fortitude-ht/sizes-specs', 'https://www.goodyear.com/en-US/tires/wrangler-fortitude-ht-c-type/sizes-specs', 'https://www.goodyear.com/en-US/tires/wrangler-fortitude-ht-lt/sizes-specs', 'https://www.goodyear.com/en-US/tires/wrangler-hp/sizes-specs', 'https://www.goodyear.com/en-US/tires/wrangler-ht/sizes-specs', 'https://www.goodyear.com/en-US/tires/wrangler-mtr-kevlar/sizes-specs', 'https://www.goodyear.com/en-US/tires/wrangler-silentarmor/sizes-specs', 'https://www.goodyear.com/en-US/tires/wrangler-sr-a/sizes-specs', 'https://www.goodyear.com/en-US/tires/wrangler-st/sizes-specs', 'https://www.goodyear.com/en-US/tires/wrangler-trailrunner-at/sizes-specs', 'https://www.goodyear.com/en-US/tires/wrangler-trailrunner-at-lt/sizes-specs']
-
+'''The size_link filtered from Goodyear sitemap which contains only size-specs links as the anchor to do further manipulation'''
 
 keys = ["Width","Aspect","Rim_size","Product_Code","Speed_Rating","Load_Index","Load_Range","Sidewall","Uniform_Tire_Quality_Grade","Max_Load", "Max_Inflation_Pressure","Approved_Rim_Width","Measured_Rim_Width","Section_Width","Tread_Depth","Outside_Diameter","Revs_Per_Mile","Price","Season","Terrain", "Warranty", "Brand_name", "Tire_name", "Image_links", "Features","Average_Rating","Total_reviews","Handling_rating","Tidecomfort","Threadlife","Traction","Wet_traction","Intertraction", "Product_Link", "Size_Link"]
 
@@ -51,7 +51,6 @@ start = time.time()
 for url in size_links:
     print(url)
     final_list = []
-    """Go to raw_link"""
     raw_link = url.replace("/sizes-specs", "")
     response2 = requests.get(raw_link, headers=headers)
     raw_page = BeautifulSoup(response2.content, 'html.parser')
@@ -59,6 +58,7 @@ for url in size_links:
         season = raw_page.find("span", "icon-all-weather--new").findNext().text
     except:
         try:
+            '''From here try to handle the PHP layout as meeting the new website's page'''
             season = raw_page.find("span", "icon-summer--new").findNext().text
         except:
             season = ""
@@ -147,6 +147,8 @@ for url in size_links:
             width = size[0]
             aspect = size[1]
             rim_size = size[2]
+            '''Here use Re split the one string code to 3 aspects as row root'''
+            
             first_list.extend([width, aspect, rim_size])
             for raw_element in list_elements[1:16]:
                 if "$" in raw_element.text:
@@ -159,7 +161,7 @@ for url in size_links:
                 writer.writerow(final_results)
 
             if len(list_elements) == 32:
-                print(tire_raw_name+ "111111")
+                '''Here handling the errot that the different UID that hidden inside the drop out UID'''
                 second_list = []
                 size2 = re.findall('\d+', list_elements[16].text)
                 width2 = size2[0]
@@ -227,7 +229,6 @@ for url in size_links:
             writer.writerow(final_results)
 
         if len(list_elements) == 32:
-            print(url+"111111")
             second_list = []
             size2 = re.findall('\d+', list_elements[16].text)
             width2 = size2[0]
@@ -244,7 +245,7 @@ for url in size_links:
                 writer = csv.writer(file)
                 writer.writerow(final_results2)
 
-    print(url)
+                
 stop = time.time()
 print(stop-start)
 
